@@ -8,7 +8,7 @@ import Loader from 'components/ui/Loader';
 import CommentsList from 'components/containers/CommentsList';
 
 const Post: React.FC  = () => {
-  const id = useParams().id!;
+  const { id } = useParams();
 
   const [ post, setPost ] = useState<TPost>({
     item: {
@@ -26,7 +26,7 @@ const Post: React.FC  = () => {
   });
 
   useEffect(() => {
-    PostsApi.loadItem(id)
+    id && PostsApi.loadItem(id)
       .then((item) => {
         setPost({
           item,
@@ -36,7 +36,7 @@ const Post: React.FC  = () => {
   }, [id]);
 
   useEffect(() => {
-    CommentsApi.loadList(id)
+    id && CommentsApi.loadList(id)
       .then((list) => {
         setComments({
           list,
