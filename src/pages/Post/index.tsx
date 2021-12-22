@@ -33,16 +33,14 @@ const Post: React.FC  = () => {
           loading: false
         });
       });
-  }, [id]);
 
-  useEffect(() => {
     id && CommentsApi.loadList(id)
-      .then((list) => {
-        setComments({
-          list,
-          loading: false
+        .then((list) => {
+          setComments({
+            list,
+            loading: false
+          });
         });
-      });
   }, [id]);
 
   return (
@@ -54,7 +52,7 @@ const Post: React.FC  = () => {
               <h3>{post.item.title}</h3>
               <p>{post.item.body}</p>
             </div>
-            { (comments.list && comments.list.length) && <CommentsList comments={comments.list} /> }
+            { comments.list.length && <CommentsList comments={ comments.list } /> }
           </div>
         )
       )}
