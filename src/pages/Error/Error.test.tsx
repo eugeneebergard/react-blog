@@ -11,7 +11,7 @@ describe('Error', () => {
     );
 
     test('link must be visible and contain the correct route', () => {
-        expect(screen.getByText(/Перейти на главную/i)).toBeVisible();
-        expect(screen.getByText(/Перейти на главную/i)).toHaveAttribute('href', `${routes.home}`);
+        expect(screen.getByText(/Go to Home page/i)).toBeVisible();
+        expect(screen.getByText(/Go to Home page/i)).toHaveAttribute('href', `${routes.home}`);
     })
 })

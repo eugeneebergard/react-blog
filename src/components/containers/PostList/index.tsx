@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './PostList.module.scss'
+import styles from './PostList.module.sass'
 import PostItem from '../PostItem';
 import { PostListProps } from './PostList.types';
 

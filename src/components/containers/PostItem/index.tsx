@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './PostItem.module.scss'
+import styles from './PostItem.module.sass'
 import { Link } from 'react-router-dom';
 import { PostItemProps } from './PostItem.types';
 

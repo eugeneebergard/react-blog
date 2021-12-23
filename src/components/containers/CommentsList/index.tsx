@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CommentsList.module.scss'
+import styles from './CommentsList.module.sass'
 import { CommentsListProps } from './CommentsList.types';
 import CommentsItem from '../CommentsItem';
 

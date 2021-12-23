@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './Post.module.scss';
+import styles from './Post.module.sass';
 import PostsApi from 'api/PostsApi';
 import CommentsApi from 'api/CommentsApi';
 import { TPost, TComments } from "./Post.types";

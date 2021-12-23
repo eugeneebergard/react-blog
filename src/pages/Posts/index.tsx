@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Posts.module.scss';
+import styles from './Posts.module.sass';
 import PostsApi from 'api/PostsApi';
 import { TPosts } from './Posts.types';
 import PostList from 'components/containers/PostList';

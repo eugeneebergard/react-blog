@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CommentsItem.module.scss';
+import styles from './CommentsItem.module.sass';
 import { CommentsItemProps } from './CommentsItem.types';
 
 const CommentsItem: React.FC<CommentsItemProps> = ({ comment }) => {
