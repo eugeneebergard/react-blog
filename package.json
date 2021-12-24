@@ -27,8 +27,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "prettier --check './**/*.{js,ts,tsx}'",
-    "format": "prettier --write './**/*.{js,ts,tsx}'"
+    "check": "prettier --check 'src/**/*.{js,ts,tsx}'",
+    "format": "prettier --write 'src/**/*.{js,ts,tsx}'",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
