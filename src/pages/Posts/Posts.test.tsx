@@ -28,7 +28,11 @@ describe('Posts', () => {
     const promise = Promise.resolve({ data: hits })
     mockedAxios.get.mockImplementationOnce(() => promise)
 
-    render(<BrowserRouter><Posts /></BrowserRouter>)
+    render(
+      <BrowserRouter>
+        <Posts />
+      </BrowserRouter>
+    )
 
     expect(screen.getByTestId('loader')).toBeInTheDocument()
     expect(screen.queryByRole('list')).toBeNull()

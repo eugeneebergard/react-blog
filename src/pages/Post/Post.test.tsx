@@ -40,7 +40,11 @@ describe('Post', () => {
     mockedAxios.get.mockImplementation(() => promise)
     // mockedAxios.get.mockImplementationOnce(() => promiseComments)
 
-    render(<BrowserRouter><Post /></BrowserRouter>)
+    render(
+      <BrowserRouter>
+        <Post />
+      </BrowserRouter>
+    )
 
     expect(screen.getAllByTestId('loader')[0]).toBeInTheDocument()
     expect(screen.queryByTestId('post')).toBeNull()
@@ -51,7 +55,6 @@ describe('Post', () => {
     // expect(screen.getByText(/example title/i)).toBeInTheDocument()
     // expect(screen.getByText(/example text/i)).toBeInTheDocument()
     // expect(screen.queryAllByTestId('loader')[0]).toBeNull()
-
 
     // ==== Проверки для второго запроса ==== \\
     // expect(screen.getAllByTestId('loader')[1]).toBeInTheDocument()
