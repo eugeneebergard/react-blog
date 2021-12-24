@@ -53,7 +53,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --write './**/*.{js,ts,tsx}' && npm run test -- --watchAll=false && git add ."
+      "pre-commit": "prettier --write './**/*.{js,ts,tsx}' && npm run test"
     }
   }
 }
