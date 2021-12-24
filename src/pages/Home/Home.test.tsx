@@ -11,7 +11,7 @@ describe('Home', () => {
   )
 
   test('link must be visible and contain the correct route', () => {
-    expect(screen.getByText(/Let's go check posts!/i)).toBeVisible()
-    expect(screen.getByText(/Let's go check posts!/i)).toHaveAttribute('href', `${routes.posts}`)
+    expect(screen.getByText(/Check posts/i)).toBeVisible()
+    expect(screen.getByText(/Check posts/i)).toHaveAttribute('href', `${routes.posts}`)
   })
 })

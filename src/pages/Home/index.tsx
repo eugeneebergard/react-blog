@@ -8,8 +8,8 @@ const Home: React.FC = () => {
     <section className="home">
       <ReactLogo />
       <h2>
-        <Link to={routes.posts} className="link">
-          Let's go check posts!
+        <Link to={routes.posts} className="link btn">
+          Check posts
         </Link>
       </h2>
     </section>

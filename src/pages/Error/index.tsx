@@ -11,7 +11,7 @@ const Error: React.FC = () => {
         <p className={styles.subtitle}>Page not found</p>
         <p className={styles.subtitle}>Better 404 with back button than pie in the sky</p>
       </div>
-      <Link className={styles.link} to={routes.home}>
+      <Link className="btn link" to={routes.home}>
         Go to Home page
       </Link>
     </section>
