@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './CommentsItem.module.sass';
-import { CommentsItemProps } from './CommentsItem.types';
+import React from 'react'
+import styles from './CommentsItem.module.sass'
+import { CommentsItemProps } from './CommentsItem.types'
 
 const CommentsItem: React.FC<CommentsItemProps> = ({ comment }) => {
   return (
@@ -9,9 +9,9 @@ const CommentsItem: React.FC<CommentsItemProps> = ({ comment }) => {
         <h4>{comment.name}</h4>
         <span>{comment.email}</span>
       </div>
-      <p className={styles.text}>{ comment.body }</p>
+      <p className={styles.text}>{comment.body}</p>
     </li>
-  );
+  )
 }
 
-export default CommentsItem;
+export default CommentsItem

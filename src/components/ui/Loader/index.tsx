@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Loader.module.scss';
+import React from 'react'
+import styles from './Loader.module.scss'
 
-const Loader: React.FC = () =>  {
+const Loader: React.FC = () => {
   return (
     <div data-testid="loader" style={{ display: 'flex', justifyContent: 'center', margin: '.5rem' }}>
       <div className={styles.ldsEllipsis}>
@@ -11,7 +11,7 @@ const Loader: React.FC = () =>  {
         <div />
       </div>
     </div>
-  );
+  )
 }
 
-export default Loader;
+export default Loader

@@ -1,11 +1,11 @@
-import { IComment, IPost } from "interfaces";
+import { IComment, IPost } from 'interfaces'
 
 export type TComments = {
-    list: IComment[],
-    loading: boolean,
+  list: IComment[]
+  loading: boolean
 }
 
 export type TPost = {
-    item: IPost,
-    loading: boolean,
+  item: IPost
+  loading: boolean
 }

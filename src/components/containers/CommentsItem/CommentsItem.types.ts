@@ -1,5 +1,5 @@
-import { IComment } from "interfaces";
+import { IComment } from 'interfaces'
 
 export type CommentsItemProps = {
-    comment: IComment,
+  comment: IComment
 }

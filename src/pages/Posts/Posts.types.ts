@@ -1,6 +1,6 @@
-import { IPost } from 'interfaces';
+import { IPost } from 'interfaces'
 
 export type TPosts = {
-    list: IPost[],
-    loading: boolean,
+  list: IPost[]
+  loading: boolean
 }

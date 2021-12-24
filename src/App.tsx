@@ -1,8 +1,8 @@
-import './App.css';
-import React from 'react';
-import Routes from './routes';
-import Header from './components/containers/Header';
-import Footer from './components/containers/Footer';
+import './App.css'
+import React from 'react'
+import Routes from './routes'
+import Header from './components/containers/Header'
+import Footer from './components/containers/Footer'
 
 const App: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

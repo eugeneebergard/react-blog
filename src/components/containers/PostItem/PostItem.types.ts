@@ -1,5 +1,5 @@
-import { IPost } from "interfaces";
+import { IPost } from 'interfaces'
 
 export type PostItemProps = {
-    post: IPost,
+  post: IPost
 }
