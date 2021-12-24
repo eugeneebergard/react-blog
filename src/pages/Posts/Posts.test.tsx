@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, act } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 import { IPost } from 'interfaces'
@@ -28,19 +28,14 @@ describe('Posts', () => {
     const promise = Promise.resolve({ data: hits })
     mockedAxios.get.mockImplementationOnce(() => promise)
 
-    const { getAllByRole, getByTestId, queryByRole, queryByTestId } = render(
-      <BrowserRouter>
-        <Posts />
-      </BrowserRouter>
-    )
+    render(<BrowserRouter><Posts /></BrowserRouter>)
 
-    expect(getByTestId('loader')).toBeInTheDocument()
-    expect(queryByRole('list')).toBeNull()
+    expect(screen.getByTestId('loader')).toBeInTheDocument()
+    expect(screen.queryByRole('list')).toBeNull()
 
-    // @ts-ignore
-    await act(() => promise)
+    await waitFor(() => promise)
 
-    expect(getAllByRole('listitem')).toHaveLength(2)
-    expect(queryByTestId('loader')).toBeNull()
+    expect(screen.getAllByRole('listitem')).toHaveLength(2)
+    expect(screen.queryByTestId('loader')).toBeNull()
   })
 })

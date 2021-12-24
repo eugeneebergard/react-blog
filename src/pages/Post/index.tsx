@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './Post.module.sass'
+import { Link } from 'react-router-dom'
+import { routes } from 'routes/routes'
 import PostsApi from 'api/PostsApi'
 import CommentsApi from 'api/CommentsApi'
 import { TPost, TComments } from './Post.types'
@@ -45,20 +47,34 @@ const Post: React.FC = () => {
 
   return (
     <div>
-      {post.loading || comments.loading ? (
+      {post.loading ? (
         <Loader />
-      ) : (
-        post.item && (
-          <div>
-            <div className={styles.text}>
-              <h3>{post.item.title}</h3>
-              <p>{post.item.body}</p>
-            </div>
-            {comments.list.length && <CommentsList comments={comments.list} />}
+      ) : Object.keys(post.item).length ? (
+        <div>
+          <div className={styles.text}>
+            <h3>{post.item.title}</h3>
+            <p>{post.item.body}</p>
           </div>
-        )
+          {comments.loading ? (
+            <Loader />
+          ) : comments.list.length ? (
+            <CommentsList comments={comments.list} />
+          ) : (
+            <div className={styles.noComments}>
+              <h3>No comments!</h3>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className={styles.notFound}>
+          <h2>Post not found</h2>
+          <Link to={routes.posts} className="link btn">
+            Back to posts
+          </Link>
+        </div>
       )}
     </div>
   )
 }
+
 export default Post
