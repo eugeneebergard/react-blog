@@ -50,10 +50,5 @@
   },
   "devDependencies": {
     "prettier": "^2.5.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "prettier --write './**/*.{js,ts,tsx}' && npm run test"
-    }
   }
 }
