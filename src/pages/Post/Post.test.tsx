@@ -1,10 +1,10 @@
 import React from 'react'
-import {render, waitFor, screen, getAllByTestId} from '@testing-library/react'
+import { render, waitFor, screen, getAllByTestId } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import { IPost, IComment } from 'interfaces'
 import Post from './index'
-import { routes } from 'routes/routes';
+import { routes } from 'routes/routes'
 
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
@@ -46,16 +46,16 @@ describe('Post', () => {
     mockedAxios.get.mockImplementation(() => promise)
 
     render(
-      <MemoryRouter initialEntries={[`${routes.posts}/${hit.id}`]}  >
+      <MemoryRouter initialEntries={[`${routes.posts}/${hit.id}`]}>
         <Routes>
           <Route path={routes.post} element={<Post />} />
         </Routes>
       </MemoryRouter>
     )
 
-    await waitFor(() => promise);
+    await waitFor(() => promise)
 
-    expect(screen.queryByTestId('loader')).toBeNull();
+    expect(screen.queryByTestId('loader')).toBeNull()
     expect(screen.getByText(/example title/i)).toBeInTheDocument()
     expect(screen.getByText(/example text/i)).toBeInTheDocument()
   })
@@ -76,8 +76,6 @@ describe('Post', () => {
   //   expect(screen.getByText(/post not found/i)).toBeVisible()
   //   expect(screen.getByRole('link')).toBeVisible()
   // })
-
-
 
   // test('comments', async () => {
   //   const promiseComments = Promise.resolve({ data: hits })
