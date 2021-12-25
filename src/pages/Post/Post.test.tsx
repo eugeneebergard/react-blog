@@ -1,9 +1,10 @@
 import React from 'react'
-import { render, waitFor, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
+import {render, waitFor, screen, getAllByTestId} from '@testing-library/react'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import { IPost, IComment } from 'interfaces'
 import Post from './index'
+import { routes } from 'routes/routes';
 
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
@@ -33,36 +34,63 @@ const hits: IComment[] = [
 ]
 
 describe('Post', () => {
-  test('sending a request to receive Post API and Comments API and correct rendering of the loading', async () => {
-    const promise = Promise.resolve({ data: hit })
-    // const promiseComments = Promise.resolve({ data: hits })
+  test('Component render', () => {
+    render(<Post />)
 
+    expect(screen.getByTestId('loader')).toBeInTheDocument()
+    expect(screen.queryByTestId('post')).toBeNull()
+  })
+
+  test('Successful post request', async () => {
+    const promise = Promise.resolve({ data: hit })
     mockedAxios.get.mockImplementation(() => promise)
-    // mockedAxios.get.mockImplementationOnce(() => promiseComments)
 
     render(
-      <BrowserRouter>
-        <Post />
-      </BrowserRouter>
+      <MemoryRouter initialEntries={[`${routes.posts}/${hit.id}`]}  >
+        <Routes>
+          <Route path={routes.post} element={<Post />} />
+        </Routes>
+      </MemoryRouter>
     )
 
-    expect(screen.getAllByTestId('loader')[0]).toBeInTheDocument()
-    expect(screen.queryByTestId('post')).toBeNull()
+    await waitFor(() => promise);
 
-    await waitFor(() => promise)
-
-    // ==== С этого места все падает ==== \\
-    // expect(screen.getByText(/example title/i)).toBeInTheDocument()
-    // expect(screen.getByText(/example text/i)).toBeInTheDocument()
-    // expect(screen.queryAllByTestId('loader')[0]).toBeNull()
-
-    // ==== Проверки для второго запроса ==== \\
-    // expect(screen.getAllByTestId('loader')[1]).toBeInTheDocument()
-    // expect(screen.queryByRole('list')).toBeNull()
-    //
-    // await waitFor(() => promiseComments)
-    //
-    // expect(screen.getAllByRole('listitem')).toHaveLength(2)
-    // expect(screen.queryAllByTestId('loader')[1]).toBeNull()
+    expect(screen.queryByTestId('loader')).toBeNull();
+    expect(screen.getByText(/example title/i)).toBeInTheDocument()
+    expect(screen.getByText(/example text/i)).toBeInTheDocument()
   })
+
+  // test('Rejected post request', async () => {
+  //   const promise = Promise.reject(new Error())
+  //   mockedAxios.get.mockRejectedValue(() => promise)
+  //
+  //   render(
+  //       <MemoryRouter initialEntries={[`${routes.posts}/999`]}  >
+  //         <Routes>
+  //           <Route path={routes.post} element={<Post />} />
+  //         </Routes>
+  //       </MemoryRouter>
+  //   )
+  //
+  //   expect(screen.queryByTestId('loader')).toBeNull();
+  //   expect(screen.getByText(/post not found/i)).toBeVisible()
+  //   expect(screen.getByRole('link')).toBeVisible()
+  // })
+
+
+
+  // test('comments', async () => {
+  //   const promiseComments = Promise.resolve({ data: hits })
+  //   mockedAxios.get.mockImplementationOnce(() => promiseComments)
+  //
+  //   const loader = screen.getAllByTestId('loader')[1];
+  //
+  //   expect(screen.getAllByTestId('loader')[1]).toBeInTheDocument()
+  //   expect(screen.queryByRole('list')).toBeNull()
+  //
+  //   await waitFor(() => promiseComments)
+  //
+  //   expect(screen.getAllByRole('listitem')).toHaveLength(2)
+  //   expect(screen.queryAllByTestId('loader')[12]).toBeNull()
+  // })
 })
