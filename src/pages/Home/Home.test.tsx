@@ -10,7 +10,7 @@ describe('Home', () => {
     </BrowserRouter>
   )
 
-  test('link must be visible and contain the correct route', () => {
+  it('link must be visible and contain the correct route', () => {
     expect(screen.getByText(/Check posts/i)).toBeVisible()
     expect(screen.getByText(/Check posts/i)).toHaveAttribute('href', `${routes.posts}`)
   })

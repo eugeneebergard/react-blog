@@ -34,14 +34,14 @@ const hits: IComment[] = [
 ]
 
 describe('Post', () => {
-  test('Component render', () => {
+  it('Component render', () => {
     render(<Post />)
 
     expect(screen.getByTestId('loader')).toBeInTheDocument()
     expect(screen.queryByTestId('post')).toBeNull()
   })
 
-  test('Successful post and commits requests', async () => {
+  it('Successful post and commits requests', async () => {
     const resolvedMock = mockedAxios.get.mockResolvedValue({ data: hit })
 
     render(
@@ -61,7 +61,7 @@ describe('Post', () => {
   })
   afterEach(jest.clearAllMocks)
 
-  test('Rejected post request', async () => {
+  it('Rejected post request', async () => {
     const rejectedMock = mockedAxios.get.mockRejectedValueOnce(new Error())
 
     render(

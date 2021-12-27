@@ -10,7 +10,7 @@ describe('Error', () => {
     </BrowserRouter>
   )
 
-  test('link must be visible and contain the correct route', () => {
+  it('link must be visible and contain the correct route', () => {
     expect(screen.getByText(/Go to Home page/i)).toBeVisible()
     expect(screen.getByText(/Go to Home page/i)).toHaveAttribute('href', `${routes.home}`)
   })
