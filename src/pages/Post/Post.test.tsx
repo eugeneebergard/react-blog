@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, waitFor, screen, getAllByTestId } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import { IPost, IComment } from 'interfaces'
@@ -41,9 +41,8 @@ describe('Post', () => {
     expect(screen.queryByTestId('post')).toBeNull()
   })
 
-  test('Successful post request', async () => {
-    const promise = Promise.resolve({ data: hit })
-    mockedAxios.get.mockImplementation(() => promise)
+  test('Successful post and commits requests', async () => {
+    const resolvedMock = mockedAxios.get.mockResolvedValue({ data: hit })
 
     render(
       <MemoryRouter initialEntries={[`${routes.posts}/${hit.id}`]}>
@@ -53,29 +52,32 @@ describe('Post', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => promise)
+    await waitFor(() => resolvedMock)
 
+    expect(mockedAxios.get).toHaveBeenCalledTimes(2)
     expect(screen.queryByTestId('loader')).toBeNull()
     expect(screen.getByText(/example title/i)).toBeInTheDocument()
     expect(screen.getByText(/example text/i)).toBeInTheDocument()
   })
+  afterEach(jest.clearAllMocks)
 
-  // test('Rejected post request', async () => {
-  //   const promise = Promise.reject(new Error())
-  //   mockedAxios.get.mockRejectedValue(() => promise)
-  //
-  //   render(
-  //       <MemoryRouter initialEntries={[`${routes.posts}/999`]}  >
-  //         <Routes>
-  //           <Route path={routes.post} element={<Post />} />
-  //         </Routes>
-  //       </MemoryRouter>
-  //   )
-  //
-  //   expect(screen.queryByTestId('loader')).toBeNull();
-  //   expect(screen.getByText(/post not found/i)).toBeVisible()
-  //   expect(screen.getByRole('link')).toBeVisible()
-  // })
+  test('Rejected post request', async () => {
+    const rejectedMock = mockedAxios.get.mockRejectedValueOnce(new Error())
+
+    render(
+      <MemoryRouter initialEntries={[`${routes.posts}/notValidId`]}>
+        <Routes>
+          <Route path={routes.post} element={<Post />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => rejectedMock)
+
+    expect(screen.queryByTestId('loader')).toBeNull()
+    expect(screen.getByText(/post not found/i)).toBeVisible()
+    expect(screen.getByRole('link')).toBeVisible()
+  })
 
   // test('comments', async () => {
   //   const promiseComments = Promise.resolve({ data: hits })

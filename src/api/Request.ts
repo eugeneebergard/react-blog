@@ -9,8 +9,7 @@ export default class ApiRequest {
       const response = await axios.get(this.baseURL + url)
       return response.data
     } catch (error: unknown) {
-      const req: string = `Запрос: ${url}.`
-      errorHandler(error, req)
+      errorHandler(error, `Запрос: ${url}.`)
     }
     return {}
   }

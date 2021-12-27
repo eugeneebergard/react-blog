@@ -34,14 +34,14 @@ const Post: React.FC = () => {
           item,
           loading: false,
         })
-      })
-
-    id &&
-      CommentsApi.loadList(id).then(list => {
-        setComments({
-          list,
-          loading: false,
-        })
+        if (Object.keys(item).length) {
+          CommentsApi.loadList(id).then(list => {
+            setComments({
+              list,
+              loading: false,
+            })
+          })
+        }
       })
   }, [id])
 

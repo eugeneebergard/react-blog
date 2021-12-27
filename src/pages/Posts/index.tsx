@@ -23,7 +23,7 @@ const Posts: React.FC = () => {
   return (
     <section>
       <h1 className={styles.title}>Post List</h1>
-      {posts.loading ? <Loader /> : posts.list.length && <PostList posts={posts.list} />}
+      {posts.loading ? <Loader /> : posts.list.length ? <PostList posts={posts.list} /> : <h3>No Posts!</h3>}
     </section>
   )
 }
